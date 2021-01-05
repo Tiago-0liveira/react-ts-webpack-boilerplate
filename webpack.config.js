@@ -12,7 +12,10 @@ module.exports = {
 	},
 	devtool: "source-map",
 	resolve: {
-		extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+		extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".scss"],
+		fallback: {
+			util: require.resolve("util/"),
+		},
 	},
 	module: {
 		rules: [
@@ -20,8 +23,22 @@ module.exports = {
 				test: /\.tsx?$/,
 				loader: "awesome-typescript-loader",
 			},
+			{
+				test: /\.s[ac]ss$/i,
+				use: [
+					"style-loader",
+					"css-loader",
+					{
+						loader: "sass-loader",
+						options: {
+							implementation: require("sass"),
+						},
+					},
+				],
+			},
 		],
 	},
+	externals: { sqlite3: "commonjs sqlite3" },
 
 	plugins: [
 		new HtmlWebPackPlugin({

@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import AppManager from "./Apps"
+import "./styles/style.scss"
 
-
-class App extends React.Component {
+class App extends React.Component<{}, {}> {
     render() {
         return (
-            <ul >
-                {[1,2,3,4,5].map(i => <li>{i}</li>)}
-            </ul>
+            <AppManager />
         )
     }
 }
